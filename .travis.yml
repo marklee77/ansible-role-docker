@@ -44,7 +44,7 @@ script:
 
     # Check to make sure we can connect to MySQL.
     - >
-      mysql -u root -e 'show databases;'
+      sudo -i mysql -u root -e 'show databases;'
       | grep -q 'performance_schema'
       && (echo 'MariaDB running normally' && exit 0)
       || (echo 'MariaDB not running' && exit 1)
