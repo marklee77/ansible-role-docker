@@ -1,25 +1,21 @@
-marklee77.mariadb
-=================
+marklee77.chrony
+================
 
-[![Build Status](https://travis-ci.org/marklee77/ansible-role-mariadb.svg?branch=master)](https://travis-ci.org/marklee77/ansible-role-mariadb)
+[![Build Status](https://travis-ci.org/marklee77/ansible-role-chrony.svg?branch=master)](https://travis-ci.org/marklee77/ansible-role-chrony)
 
-MariaDB role for Ubuntu.
+Chrony role for Ubuntu.
 
 Role Variables
 --------------
 
-- mariadb_repository_mirror: mariadb repository mirror, set to 
-                             http://mirrors.coreix.net/mariadb by default.
-- mariadb_version: mariadb version, set to 10.0 by default.
-- mariadb_root_mysql_password: root mysql password; set to a random value by 
-                               default.
+- chrony_ntp_servers: list of ntp servers, set to a selection from pool.ntp.org by default.
 
 Example Playbook
 -------------------------
 
     - hosts: default
       roles:
-        - marklee77.mariadb
+        - marklee77.chrony
 
 License
 -------

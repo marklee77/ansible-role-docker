@@ -8,11 +8,9 @@ env:
 before_install:
 
     # Remove MySQL.
-    - sudo apt-get -y purge 'mysql*'
+    - sudo apt-get -y purge 'ntp*'
     - sudo apt-get -y autoremove
     - sudo apt-get -y autoclean
-    - sudo rm -rf /var/lib/mysql
-    - sudo truncate -s 0 /var/log/mysql/error.log
 
     # Make sure everything's up to date.
     - sudo apt-get update -qq
@@ -26,6 +24,7 @@ install:
     - "printf '[defaults]\nroles_path = ../' > ansible.cfg"
 
 script:
+
     # Check the role/playbook's syntax.
     - ansible-playbook -i tests/inventory tests/$SITE --syntax-check
 
@@ -37,15 +36,4 @@ script:
       | grep -q 'changed=0.*failed=0'
       && (echo 'Idempotence test: pass' && exit 0)
       || (echo 'Idempotence test: fail' && exit 1)
-
-    # Some MySQL debugging (show all the logs).
-    - "sudo ls -lah /var/log"
-    - "sudo cat /var/log/mysql/error.log"
-
-    # Check to make sure we can connect to MySQL.
-    - >
-      sudo -i mysql -u root -e 'show databases;'
-      | grep -q 'performance_schema'
-      && (echo 'MariaDB running normally' && exit 0)
-      || (echo 'MariaDB not running' && exit 1)
 

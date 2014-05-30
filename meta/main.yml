@@ -1,7 +1,7 @@
 ---
 galaxy_info:
   author: Mark Stillwell
-  description: MariaDB for Ubuntu
+  description: Chrony for Ubuntu
   license: GPLv2
   min_ansible_version: 1.2
   platforms:
@@ -13,6 +13,5 @@ galaxy_info:
     - saucy
     - trusty
   categories:
-  - database
-  - database:sql
+    - system
 dependencies: []
