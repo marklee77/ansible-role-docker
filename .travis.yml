@@ -46,6 +46,6 @@ script:
     - >
       mysql -u root -e 'show databases;'
       | grep -q 'performance_schema'
-      && (echo 'MySQL running normally' && exit 0)
-      || (echo 'MySQL not running' && exit 1)
+      && (echo 'MariaDB running normally' && exit 0)
+      || (echo 'MariaDB not running' && exit 1)
 

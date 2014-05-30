@@ -27,6 +27,7 @@
     cache_valid_time: 600
   with_items:
     - mariadb-server
+    - mariadb-client
     - python-mysqldb
 
 - name: ensure mariadb is started and enabled
