@@ -1,0 +1,31 @@
+---
+- name: install chrony packages
+  apt: 
+    pkg: "{{ item }}" 
+    state: latest 
+    update_cache: yes 
+    cache_valid_time: 600
+  with_items:
+    - chrony
+
+- name: update /etc/chrony/chrony.conf from template
+  template:
+    src: etc/chrony/chrony.conf
+    dest: /etc/chrony/chrony.conf
+    owner: root
+    group: root
+    mode: 0644
+
+- name: set clock via ntp
+  command: ntpdate -b {{ chrony_ntp_servers[0] }}
+
+- name: save system clock to hardware
+  command: hwclock --systohc
+
+- name: ensure chrony service is started and enabled
+  service: 
+    name: chrony
+    enabled: yes
+    state: started 
+    pattern: /usr/sbin/chronyd
+
