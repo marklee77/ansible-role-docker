@@ -1,0 +1,5 @@
+---
+mariadb_repository_mirror: http://mirrors.coreix.net/mariadb
+mariadb_version: 10.0
+
+mariadb_root_mysql_password: "{{ lookup('password', inventory_dir + '/private/credentials/root-mysql-password') }}"

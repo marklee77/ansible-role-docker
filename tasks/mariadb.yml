@@ -1,0 +1,81 @@
+---
+- name: ensure required mariadb prerequisite packages are installed
+  apt: 
+    pkg: "{{ item }}"
+    state: latest 
+    update_cache: yes 
+    cache_valid_time: 600
+  with_items:
+    - python-software-packages
+    - python-mysqldb
+
+- name: ensure mariadb repository public key is installed
+  apt_key: 
+    id: 0xcbcb082a1bb943db
+    keyserver: hkp://keyserver.ubuntu.com:80
+    state: present
+
+- name: ensure mariadb repository is enabled
+  apt_repository: 
+    repo: deb {{ mariadb_repository_mirror }}/repo/{{ mariadb_version }}/ubuntu {{ ansible_distribution_release }} main
+    update_cache: yes
+    state: present
+
+- name: ensure mariadb packages are installed
+  apt: 
+    pkg: "{{ item }}"
+    state: latest 
+    update_cache: yes 
+    cache_valid_time: 600
+  with_items:
+    - mariadb-server
+
+- name: ensure mariadb is started and enabled
+  service: 
+    name: mariadb
+    state: started 
+    enabled: yes
+
+- name: update mariadb root password for all root accounts
+  mysql_user: 
+    name: root 
+    host: localhost 
+    password: "{{ mariadb_root_mysql_password }}"
+    priv: "*.*:ALL,GRANT"
+    state: present
+
+# Need to do this for idempotency, see
+# http://ansible.cc/docs/modules.html#mysql-user
+- name: update .my.cnf file with root password credentials
+  template: 
+    src: root/.my.cnf 
+    dest: /root/.my.cnf 
+    owner: root 
+    group: root 
+    mode: 0600
+
+- name: update mariadb root password for all root accounts
+  mysql_user: 
+    name: root 
+    host: "{{ item }}" 
+    password: "{{ mysql_root_mysql_password }}" 
+    priv: "*.*:ALL,GRANT"
+    state: present
+  with_items:
+    - "{{ ansible_hostname }}"
+    - 127.0.0.1
+    - ::1
+
+- name: ensure anonymous users are not in the database
+  mysql_user: 
+    name: "" 
+    host: "{{ item }}"
+    state: absent
+  with_items:
+    - "{{ ansible_hostname }}"
+    - "{{ inventory_hostname }}"
+    - localhost
+    - 127.0.0.1
+    - ::1
+    - "%"
+
