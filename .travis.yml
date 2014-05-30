@@ -7,13 +7,10 @@ env:
 
 before_install:
 
-    # Remove MySQL.
-    - sudo apt-get -y purge 'ntp*'
-    - sudo apt-get -y autoremove
-    - sudo apt-get -y autoclean
-
     # Make sure everything's up to date.
     - sudo apt-get update -qq
+    - sudo apt-get -y autoremove
+    - sudo apt-get -y autoclean
 
 install:
 
