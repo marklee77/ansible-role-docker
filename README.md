@@ -1,6 +1,8 @@
 marklee77.mariadb
 =================
 
+[![Build Status](https://travis-ci.org/marklee77/ansible-role-mariadb.svg?branch=master)](https://travis-ci.org/marklee77/ansible-role-mariadb)
+
 MariaDB role for Ubuntu.
 
 Role Variables
