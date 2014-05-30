@@ -34,7 +34,7 @@ script:
 
     - >
       ansible-playbook -i tests/inventory tests/$SITE --connection=local --sudo
-      | grep -q 'change=0.*failed=0'
+      | grep -q 'changed=0.*failed=0'
       && (echo 'Idempotence test: pass' && exit 0)
       || (echo 'Idempotence test: fail' && exit 1)
 
