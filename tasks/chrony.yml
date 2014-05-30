@@ -16,10 +16,11 @@
     group: root
     mode: 0644
 
+# We say that an adjustment of 1.5 seconds or less is no change...
 - name: set clock via ntp
   command: ntpdate -b {{ chrony_ntp_servers[0] }}
   register: ntpdate_result
-  changed_when: ntpdate_result.stdout.split(' ')[-2]|float|abs > 0.01
+  changed_when: ntpdate_result.stdout.split(' ')[-2]|float|abs > 1.5
 
 - name: save system clock to hardware
   command: hwclock --systohc
