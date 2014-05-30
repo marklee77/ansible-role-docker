@@ -57,7 +57,7 @@
   mysql_user: 
     name: root 
     host: "{{ item }}" 
-    password: "{{ mysql_root_mysql_password }}" 
+    password: "{{ mariadb_root_mysql_password }}" 
     priv: "*.*:ALL,GRANT"
     state: present
   with_items:
