@@ -15,9 +15,12 @@
     owner: root
     group: root
     mode: 0644
+  notify:
+    - restart chrony
 
 - name: ensure chrony service is started and enabled
   service: 
     name: chrony
     enabled: yes
     state: started 
+    pattern: chrony
