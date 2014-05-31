@@ -15,7 +15,7 @@ before_install:
 install:
 
     # Install Ansible.
-    - sudo pip install ansible PyYAML jinja2
+    - sudo pip install --update ansible
     - ansible-playbook --version
 
     # Add ansible.cfg to pick up roles path.
