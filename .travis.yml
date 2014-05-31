@@ -15,7 +15,7 @@ before_install:
 install:
 
     # Install Ansible.
-    - sudo pip install ansible
+    - sudo pip install ansible PyYAML jinja2
     - ansible-playbook --version
 
     # Add ansible.cfg to pick up roles path.
@@ -27,7 +27,7 @@ script:
     - ansible-playbook -i tests/inventory tests/$SITE --syntax-check
 
     # Run the role/playbook with ansible-playbook.
-    - ansible-playbook -i tests/inventory tests/$SITE --connection=local --sudo
+    - ansible-playbook -i tests/inventory tests/$SITE --connection=local --sudo -vvvv
 
     - >
       ansible-playbook -i tests/inventory tests/$SITE --connection=local --sudo
