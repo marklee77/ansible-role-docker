@@ -23,7 +23,7 @@
 
 #  changed_when: ntpdate_result.stdout.split(' ')[-2]|float|abs > 1.5
 
-- debug: msg={{ntpdate_result.stdout.split(' ')[-2]}}
+- debug: msg={{ntpdate_result.stdout.split(' ')}}
 
 - name: save system clock to hardware
   command: hwclock --systohc
