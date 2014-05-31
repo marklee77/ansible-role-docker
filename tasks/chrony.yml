@@ -21,5 +21,3 @@
     name: chrony
     enabled: yes
     state: started 
-    pattern: /usr/sbin/chronyd
-
