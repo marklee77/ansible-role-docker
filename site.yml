@@ -1,5 +1,4 @@
-- hosts: default
+- hosts: all
   sudo: True
   roles:
     - marklee77.chrony
-

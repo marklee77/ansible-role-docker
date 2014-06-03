@@ -8,12 +8,13 @@ Chrony role for Ubuntu.
 Role Variables
 --------------
 
-- chrony_ntp_servers: list of ntp servers, set to a selection from pool.ntp.org by default.
+- chrony_ntp_servers: list of ntp servers, set to a selection from pool.ntp.org 
+    by default.
 
 Example Playbook
 -------------------------
 
-    - hosts: default
+    - hosts: all
       roles:
         - marklee77.chrony
 
