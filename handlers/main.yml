@@ -3,4 +3,3 @@
   service: 
     name: chrony
     state: restarted 
-    pattern: chrony
