@@ -5,22 +5,23 @@
     state: latest 
     update_cache: yes 
     cache_valid_time: 600
+  register: install_packages
   with_items:
     - chrony
 
-#- name: update /etc/chrony/chrony.conf from template
-#  template:
-#    src: etc/chrony/chrony.conf
-#    dest: /etc/chrony/chrony.conf
-#    owner: root
-#    group: root
-#    mode: 0644
-#  notify:
-#    - restart chrony
+- name: update /etc/chrony/chrony.conf from template
+  template:
+    src: etc/chrony/chrony.conf
+    dest: /etc/chrony/chrony.conf
+    owner: root
+    group: root
+    mode: 0644
+  notify:
+    - restart chrony
 
 - name: ensure chrony service is started and enabled
   service: 
     name: chrony
     enabled: yes
     state: started 
-    pattern: chrony
+    pattern: /usr/sbin/chronyd
