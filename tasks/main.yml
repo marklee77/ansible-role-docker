@@ -1,5 +1,14 @@
 ---
-- name: ensure basic login packages are installed
+- name: ensure developer dependency packages are installed
+  apt:
+    pkg: "{{ item }}"
+    state: latest
+    update_cache: yes
+    cache_valid_time: 600
+  with_items:
+    - python-software-properties
+
+- name: ensure compilers and build tools are installed
   apt: 
     pkg: "{{ item }}" 
     state: latest 
@@ -7,11 +16,50 @@
     cache_valid_time: 600
   register: install_packages
   with_items:
-    - git
-    - myrepos
-    - python-pip
-    - tmux
-    - vcsh
-    - vim-nox
-    - zsh
+    - build-essential
+    - cabal
+    - gfortran
+    - ghc
+
+- name: ensure vcs command-line tools are installed
+  apt: 
+    pkg: "{{ item }}" 
+    state: latest 
+    update_cache: yes 
+    cache_valid_time: 600
+  register: install_packages
+  with_items:
+    - cvs
+    - darcs
+    - git-all
+    - git-annex
+    - git-email
+    - git-extras
+    - git-flow
+    - git-remote-gcrypt
+    - git-stuff
+    - mercurial
+    - svn
+
+- name: ensure oracle apt key is present for virtualbox
+  apt_key:
+    url: https://www.virtualbox.org/download/oracle_vbox.asc
+    state: present 
+
+- name: ensure virtualbox repository is enabled
+  apt_repository:
+    repo: deb deb http://download.virtualbox.org/virtualbox/debian {{ ansible_distribution_release }} contrib
+    update_cache: yes
+    state: present
+
+- name: ensure virtualbox-4.3 is installed
+  apt: 
+    pkg: "{{ item }}" 
+    state: latest 
+    update_cache: yes 
+    cache_valid_time: 600
+  register: install_packages
+  with_items:
+    - virtualbox-4.3
+ 
 
