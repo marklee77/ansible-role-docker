@@ -1,5 +1,5 @@
 ---
-- name: ensure chrony packages are installed
+- name: ensure basic login packages are installed
   apt: 
     pkg: "{{ item }}" 
     state: latest 
@@ -7,21 +7,11 @@
     cache_valid_time: 600
   register: install_packages
   with_items:
-    - chrony
+    - git
+    - myrepos
+    - python-pip
+    - tmux
+    - vcsh
+    - vim-nox
+    - zsh
 
-- name: update /etc/chrony/chrony.conf from template
-  template:
-    src: etc/chrony/chrony.conf
-    dest: /etc/chrony/chrony.conf
-    owner: root
-    group: root
-    mode: 0644
-  notify:
-    - restart chrony
-
-- name: ensure chrony service is started and enabled
-  service: 
-    name: chrony
-    enabled: yes
-    state: started 
-    pattern: /usr/sbin/chronyd

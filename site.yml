@@ -1,5 +1,4 @@
 - hosts: all
-  tags: chrony
   sudo: True
   roles:
-    - marklee77.chrony
+    - marklee77.login-basic
