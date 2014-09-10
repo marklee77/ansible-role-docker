@@ -6,6 +6,7 @@
     update_cache: yes
     cache_valid_time: 600
   with_items:
+    - apt-transport-https
     - python-software-properties
 
 - name: ensure compilers and build tools are installed
@@ -17,7 +18,7 @@
   register: install_packages
   with_items:
     - build-essential
-    - cabal
+    - cabal-install
     - gfortran
     - ghc
 
@@ -39,7 +40,7 @@
     - git-remote-gcrypt
     - git-stuff
     - mercurial
-    - svn
+    - subversion
 
 - name: ensure oracle apt key is present for virtualbox
   apt_key:
@@ -48,10 +49,20 @@
 
 - name: ensure virtualbox repository is enabled
   apt_repository:
-    repo: deb deb http://download.virtualbox.org/virtualbox/debian {{ ansible_distribution_release }} contrib
+    repo: deb http://download.virtualbox.org/virtualbox/debian {{ ansible_distribution_release }} contrib
     update_cache: yes
     state: present
 
+- name: ensure virtualbox dependencies are installed
+  apt: 
+    pkg: "{{ item }}" 
+    state: latest 
+    update_cache: yes 
+    cache_valid_time: 600
+  register: install_packages
+  with_items:
+    - dkms
+ 
 - name: ensure virtualbox-4.3 is installed
   apt: 
     pkg: "{{ item }}" 
@@ -62,4 +73,42 @@
   with_items:
     - virtualbox-4.3
  
+- name: ensure /var/cache/ansible directory exists
+  file:
+    path: /var/cache/ansible
+    owner: root
+    group: root
+    mode: 0755
+    state: directory
 
+- name: download the vagrant deb package
+  get_url:
+    url: https://dl.bintray.com/mitchellh/vagrant/vagrant_1.6.5_x86_64.deb
+    dest: /var/cache/ansible/vagrant_1.6.5_x86_64.deb
+
+- name: ensure vagrant package is installed
+  command: dpkg -i /var/cache/ansible/vagrant_1.6.5_x86_64.deb
+  register: install_vagrant
+  changed_when: install_vagrant.stdout.startswith("Selecting previously unselected package")
+
+- name: ensure docker repository public key is installed
+  command: apt-key adv --recv-key --keyserver hkp://keyserver.ubuntu.com:80 36A1D7869245C8950F966E92D8576A8BA88D21E9
+  register: docker_key
+  changed_when: docker_key.stderr.find("imported") != -1
+
+- name: ensure docker repository is enabled
+  apt_repository:
+    repo: deb https://get.docker.io/ubuntu docker main
+    update_cache: yes
+    state: present
+
+- name: ensure lxc-docker is installed
+  apt: 
+    pkg: "{{ item }}" 
+    state: latest 
+    update_cache: yes 
+    cache_valid_time: 600
+  register: install_packages
+  with_items:
+    - lxc-docker
+ 
