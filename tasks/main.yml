@@ -15,12 +15,21 @@
     state: latest 
     update_cache: yes 
     cache_valid_time: 600
-  register: install_packages
   with_items:
     - build-essential
     - cabal-install
     - gfortran
     - ghc
+
+- name: ensure development libraries are installed
+  apt: 
+    pkg: "{{ item }}" 
+    state: latest 
+    update_cache: yes 
+    cache_valid_time: 600
+  with_items:
+    - libyaml-dev
+    • mongodb-dev
 
 - name: ensure java-related development packages are present
   apt:
@@ -38,7 +47,6 @@
     state: latest 
     update_cache: yes 
     cache_valid_time: 600
-  register: install_packages
   with_items:
     - bzr
     - cvs
@@ -80,7 +88,6 @@
     state: latest 
     update_cache: yes 
     cache_valid_time: 600
-  register: install_packages
   with_items:
     - dkms
  
@@ -90,7 +97,6 @@
     state: latest 
     update_cache: yes 
     cache_valid_time: 600
-  register: install_packages
   with_items:
     - virtualbox-4.3
  
@@ -129,11 +135,10 @@
     state: latest 
     update_cache: yes 
     cache_valid_time: 600
-  register: install_packages
   with_items:
     - lxc-docker
 
- - name: ensure heroku apt key is present 
+- name: ensure heroku apt key is present 
   apt_key:
     url: https://toolbelt.heroku.com/apt/release.key
     state: present 
@@ -150,7 +155,6 @@
     state: latest 
     update_cache: yes 
     cache_valid_time: 600
-  register: install_packages
   with_items:
     - heroku-toolbelt
  
