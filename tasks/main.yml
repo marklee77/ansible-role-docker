@@ -30,6 +30,7 @@
     cache_valid_time: 600
   register: install_packages
   with_items:
+    - bzr
     - cvs
     - darcs
     - git-all
