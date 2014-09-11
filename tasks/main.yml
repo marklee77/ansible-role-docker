@@ -22,6 +22,16 @@
     - gfortran
     - ghc
 
+- name: ensure java-related development packages are present
+  apt:
+    pkg: "{{ item }}"
+    state: latest
+    update_cache: yes
+    cache_valid_time: 600
+  with_items:
+    - openjdk-6-jdk
+    - openjdk-7-jdk
+
 - name: ensure vcs command-line tools are installed
   apt: 
     pkg: "{{ item }}" 
@@ -42,6 +52,16 @@
     - git-stuff
     - mercurial
     - subversion
+
+- name: ensure debugging-related system packages are present
+  apt:
+    pkg: "{{ item }}"
+    state: latest
+    update_cache: yes
+    cache_valid_time: 600
+  with_items:
+    - gdb
+    - valgrind
 
 - name: ensure oracle apt key is present for virtualbox
   apt_key:
