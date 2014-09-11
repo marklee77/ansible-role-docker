@@ -29,7 +29,7 @@
     cache_valid_time: 600
   with_items:
     - libyaml-dev
-    • mongodb-dev
+    - mongodb-dev
 
 - name: ensure java-related development packages are present
   apt:
