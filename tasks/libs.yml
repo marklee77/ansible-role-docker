@@ -8,3 +8,5 @@
   with_items:
     - libyaml-dev
     - mongodb-dev
+    - tcl-dev
+    - tk-dev
