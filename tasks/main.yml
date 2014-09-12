@@ -2,6 +2,7 @@
 - include: dependencies.yml
 - include: tools.yml
 - include: libs.yml
+- include: python.yml
 - include: java.yml
 - include: virtualbox.yml
 - include: vagrant.yml
