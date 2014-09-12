@@ -6,6 +6,11 @@
     update_cache: yes 
     cache_valid_time: 600
   with_items:
+    - libdb5.1-dev
+    - libdb6.0-dev
+    - libgdbm-dev
+    - libssl-dev
+    - libsqlite3-dev
     - libyaml-dev
     - mongodb-dev
     - tcl-dev
