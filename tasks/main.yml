@@ -1,4 +1,14 @@
 ---
+- name: ensure docker dependency packages are installed
+  apt:
+    pkg: "{{ item }}"
+    state: latest
+    update_cache: yes
+    cache_valid_time: 600
+  with_items:
+    - apt-transport-https
+    - python-software-properties
+
 - name: ensure docker repository public key is installed
   command: apt-key adv --recv-key --keyserver hkp://keyserver.ubuntu.com:80 36A1D7869245C8950F966E92D8576A8BA88D21E9
   register: docker_key
