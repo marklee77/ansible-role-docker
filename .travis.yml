@@ -9,7 +9,7 @@ before_install:
 install:
 
     # Install Ansible.
-    - sudo pip install --upgrade ansible
+    - sudo apt-get -y install ansible
     - ansible-playbook --version
 
 script:
@@ -23,10 +23,9 @@ script:
     # Run the role/playbook with ansible-playbook.
     - ansible-playbook -i travis/inventory site.yml
 
-    # properly idempotence should require no changes, but the travis vm seems to
-    # have trouble seeing that chrony is running...
+    # Idempotence test
     - >
       ansible-playbook -i travis/inventory site.yml
-      | grep -q 'changed=1 .*failed=0'
+      | grep -q 'changed=0.*failed=0'
       && (echo 'Idempotence test: pass' && exit 0)
       || (echo 'Idempotence test: fail' && exit 1)

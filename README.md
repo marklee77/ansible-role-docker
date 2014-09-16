@@ -1,24 +1,16 @@
-marklee77.development
-=====================
+marklee77.docker
+================
 
-FIXME!
+[![Build Status](https://travis-ci.org/marklee77/ansible-role-docker.svg?branch=master)](https://travis-ci.org/marklee77/ansible-role-docker)
 
-[![Build Status](https://travis-ci.org/marklee77/ansible-role-chrony.svg?branch=master)](https://travis-ci.org/marklee77/ansible-role-chrony)
-
-Chrony role for Ubuntu.
-
-Role Variables
---------------
-
-- chrony_ntp_servers: list of ntp servers, set to a selection from pool.ntp.org 
-    by default.
+Role to install Docker on Ubuntu.
 
 Example Playbook
 -------------------------
 
     - hosts: all
       roles:
-        - marklee77.chrony
+        - marklee77.docker
 
 License
 -------
@@ -28,4 +20,4 @@ GPLv2
 Author Information
 ------------------
 
-http://marklee77.github.io/
+http://stillwell.me
