@@ -1,0 +1,10 @@
+---
+# No additional setup is needed for this role
+
+- include: site.yml
+
+# Run demo
+
+#- hosts: all
+#  sudo: True
+#  tasks:
