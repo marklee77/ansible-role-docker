@@ -9,23 +9,22 @@ before_install:
 install:
 
     # Install Ansible.
+    - sudo apt-get -y install python-software-properties
+    - sudo apt-add-repository -y ppa:ansible/ansible
     - sudo apt-get -y install ansible
     - ansible-playbook --version
 
 script:
 
     # Check the role/playbook's syntax.
-    - ansible-playbook -i travis/inventory site.yml --syntax-check
+    - ansible-playbook -i inventories/local.ini demo.yml --syntax-check
 
     # Run the role/playbook with ansible-playbook.
-    - ansible-playbook -i travis/inventory site.yml
-
-    # Run the role/playbook with ansible-playbook.
-    - ansible-playbook -i travis/inventory site.yml
+    - ansible-playbook -i inventories/local.ini demo.yml
 
     # Idempotence test (docker does not actually run under travis)
     - >
-      ansible-playbook -i travis/inventory site.yml
+      ansible-playbook -i inventories/local.ini demo.yml
       | grep -q 'changed=1 .*failed=0'
       && (echo 'Idempotence test: pass' && exit 0)
       || (echo 'Idempotence test: fail' && exit 1)
