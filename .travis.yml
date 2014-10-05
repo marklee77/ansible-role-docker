@@ -21,6 +21,7 @@ script:
 
     # Run the role/playbook with ansible-playbook.
     - ansible-playbook -i inventories/local.ini demo.yml
+    - ansible-playbook -i inventories/local.ini demo.yml
 
     # Idempotence test (docker does not actually run under travis)
     - >
