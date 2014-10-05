@@ -1,0 +1,27 @@
+---
+- name: ensure that login user is in the docker group
+  user:
+    name: "{{ ansible_ssh_user }}"
+    groups: docker
+    append: yes
+    state: present
+  when: dockerized_deployment
+
+- name: ensure that pip is installed 
+  shell: curl -s https://bootstrap.pypa.io/get-pip.py | python -
+         creates=/usr/local/bin/pip
+  when: dockerized_deployment
+
+- name: ensure docker client libraries are installed
+  pip:
+    name: docker-py 
+    state: latest
+  when: dockerized_deployment
+
+- name: ensure docker service is started and enabled
+  service:
+    name: "{{ item }}"
+    enabled: yes
+    state: started
+  with_items:
+    - docker
