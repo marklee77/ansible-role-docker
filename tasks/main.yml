@@ -1,3 +1,5 @@
 ---
 - include: ubuntu.yml
   when: ansible_distribution == "Ubuntu"
+
+- include: all.yml
