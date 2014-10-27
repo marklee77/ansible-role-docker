@@ -1,0 +1,20 @@
+---
+- name: ensure basic yum requirements are installed and up to date
+  yum:
+    name: "{{ item  }}"
+    state: latest
+  with_items:
+    - ca-certificates
+    - epel-release
+    - git
+    - iproute
+    - iptables
+    - procps
+    - xz
+
+- name: ensure docker-io package is installed and up to date
+  yum:
+    name: "{{ item  }}"
+    state: latest
+  with_items:
+    - docker-io
