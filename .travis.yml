@@ -17,14 +17,14 @@ install:
 script:
 
     # Check the role/playbook's syntax.
-    - ansible-playbook -i inventories/local.ini demo.yml --syntax-check
+    - ansible-playbook -i inventories/local.ini provisioning/deploy.yml --syntax-check
 
     # Run the role/playbook with ansible-playbook.
-    - ansible-playbook -i inventories/local.ini demo.yml
+    - ansible-playbook -i inventories/local.ini provisioning/deploy.yml
 
     # Idempotence test (docker does not actually run under travis)
     - >
-      ansible-playbook -i inventories/local.ini demo.yml
+    - ansible-playbook -i inventories/local.ini provisioning/deploy.yml
       | grep -q 'changed=1 .*failed=0'
       && (echo 'Idempotence test: pass' && exit 0)
       || (echo 'Idempotence test: fail' && exit 1)
