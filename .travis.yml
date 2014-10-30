@@ -24,7 +24,7 @@ script:
 
     # Idempotence test (docker does not actually run under travis)
     - >
-    - ansible-playbook -i inventories/local.ini provisioning/deploy.yml
+      ansible-playbook -i inventories/local.ini provisioning/deploy.yml
       | grep -q 'changed=1 .*failed=0'
       && (echo 'Idempotence test: pass' && exit 0)
       || (echo 'Idempotence test: fail' && exit 1)
