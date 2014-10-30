@@ -18,7 +18,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   end
 
   config.vm.define "centos7" do |machine|
-    machine.vm.box = "box-cutter/centos74"
+    machine.vm.box = "box-cutter/centos70"
     machine.vm.hostname = "centos7"
   end
 
