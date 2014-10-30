@@ -1,6 +1,12 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
+def local_cache(basebox_name)
+  cache_dir = Vagrant::Environment.new.home_path.join('cache', basebox_name)
+  FileUtils.mkpath cache_dir unless cache_dir.exist?
+  cache_dir
+end
+
 # Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
 VAGRANTFILE_API_VERSION = "2"
 
