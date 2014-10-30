@@ -34,7 +34,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     machine.vm.hostname = "ubuntu-trusty"
 
     machine.vm.provision "ansible" do |ansible|
-      ansible.playbook = "demo.yml"
+      ansible.playbook = "provisioning/deploy.yml"
       ansible.limit = 'all'
     end
   end
