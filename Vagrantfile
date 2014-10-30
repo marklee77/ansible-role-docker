@@ -17,6 +17,17 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     machine.vm.hostname = "centos6"
   end
 
+  config.vm.define "centos7" do |machine|
+    machine.vm.box = "box-cutter/centos74"
+    machine.vm.hostname = "centos7"
+  end
+
+  config.vm.define "ubuntu-precise" do |machine|
+    machine.vm.box = "ubuntu/precise64"
+    machine.vm.synced_folder local_cache(machine.vm.box), "/var/cache/apt/archives"
+    machine.vm.hostname = "ubuntu-precise"
+  end
+
   config.vm.define "ubuntu-trusty" do |machine|
     machine.vm.box = "ubuntu/trusty64"
     machine.vm.synced_folder local_cache(machine.vm.box), "/var/cache/apt/archives"
