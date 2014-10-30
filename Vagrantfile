@@ -6,11 +6,19 @@ VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
-  #config.vm.box = "ubuntu/trusty64"
-  config.vm.box = "box-cutter/centos64"
-
-  config.vm.provision "ansible" do |ansible|
-    ansible.playbook = "demo.yml"
+  config.vm.define "centos6" do |machine|
+    machine.vm.box = "box-cutter/centos64"
+    machine.vm.hostname = "centos6"
   end
 
+  config.vm.define "ubuntu-trusty" do |machine|
+    machine.vm.box = "ubuntu/trusty64"
+    machine.vm.synced_folder local_cache(machine.vm.box), "/var/cache/apt"
+    machine.vm.hostname = "ubuntu-trusty"
+
+    machine.vm.provision "ansible" do |ansible|
+      ansible.playbook = "demo.yml"
+      ansible.limit = 'all'
+    end
+  end
 end

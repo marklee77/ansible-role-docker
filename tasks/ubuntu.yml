@@ -28,3 +28,11 @@
     cache_valid_time: 600
   with_items:
     - lxc-docker
+
+- name: ensure docker service is started and enabled
+  service:
+    name: "{{ item }}"
+    enabled: yes
+    state: started
+  with_items:
+    - docker

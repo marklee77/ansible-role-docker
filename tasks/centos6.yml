@@ -18,3 +18,11 @@
     state: latest
   with_items:
     - docker-io
+
+- name: ensure docker service is started and enabled
+  service:
+    name: "{{ item }}"
+    enabled: yes
+    state: started
+  with_items:
+    - docker
