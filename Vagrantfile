@@ -7,7 +7,8 @@ VAGRANTFILE_API_VERSION = "2"
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.define "centos6" do |machine|
-    machine.vm.box = "box-cutter/centos64"
+    machine.vm.box = "centos64-6.4"
+    machine.vm.box_url = "http://stillwell.me/files/centos64-6.4.box"
     machine.vm.hostname = "centos6"
     machine.vm.provision "ansible" do |ansible|
       ansible.playbook = "provisioning/deploy.yml"
