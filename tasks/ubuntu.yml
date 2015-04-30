@@ -10,9 +10,6 @@
     - software-properties-common
 
 - name: ensure docker repository public key is installed
-  environment:
-    http_proxy: "{{ lookup('env', 'http_proxy') }}"
-    http_proxy: "{{ lookup('env', 'https_proxy') }}"
   command: apt-key adv --recv-key --keyserver hkp://keyserver.ubuntu.com:80 36A1D7869245C8950F966E92D8576A8BA88D21E9
   register: docker_key
   changed_when: docker_key.stderr.find("imported") != -1
