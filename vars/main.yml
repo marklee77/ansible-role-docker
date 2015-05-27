@@ -19,10 +19,10 @@ docker_os_package_info:
           update_cache: yes
       pre_pkgs:
         - ca-certificates
+        - device-mapper-libs
         - epel-release
-        - iproute
-        - iptables
-        - procps
-        - xz
       pkgs:
         - docker-io
+
+docker_package_info: "{{ docker_os_package_info[ansible_distribution] }}"
+
