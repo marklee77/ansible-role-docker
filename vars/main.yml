@@ -1,0 +1,28 @@
+docker_os_package_info:
+    Ubuntu:
+      pkg_mgr: apt
+      args:
+          pkg: "{{ item }}"
+          state: latest
+          update_cache: yes
+          cache_valid_time: 600
+      pre_pkgs: 
+        - apt-transport-https
+        - software-properties-common
+      pkgs:
+        - lxc-docker
+    CentOS:
+      pkg_mgr: yum
+      args:
+          name: "{{ item }}"
+          state: latest
+          update_cache: yes
+      pre_pkgs:
+        - ca-certificates
+        - epel-release
+        - iproute
+        - iptables
+        - procps
+        - xz
+      pkgs:
+        - docker-io
