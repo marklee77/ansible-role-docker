@@ -21,7 +21,7 @@ galaxy_info:
     versions:
     - 7.0
     - 6.5
-categories: 
+  categories: 
   - system
   - cloud
 dependencies: []
