@@ -5,17 +5,23 @@ galaxy_info:
   license: GPLv2
   min_ansible_version: 1.2
   platforms:
-  - name: CentOS
-    versions:
-    - 6
   - name: Ubuntu
     versions:
-    - precise
-    - quantal
-    - raring
-    - saucy
     - trusty
-  categories: 
+    - precise
+  - name: Debian
+    versions:
+    - jessie
+    - wheezie
+  - name: Fedora
+    versions:
+    - 21
+    - 20
+  - name: CentOS
+    versions:
+    - 7.0
+    - 6.5
+ categories: 
   - system
   - cloud
 dependencies: []
