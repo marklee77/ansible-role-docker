@@ -40,7 +40,12 @@
   with_items:
     - docker
 
+- name: ensure that pip is installed
+  shell: curl -s https://bootstrap.pypa.io/get-pip.py | python -
+         creates=/usr/local/bin/pip
+
 - name: ensure that docker-py client library has been installed via pip
   pip:
     name: docker-py
     state: latest
+
