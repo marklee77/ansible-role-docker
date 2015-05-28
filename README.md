@@ -1,8 +1,6 @@
 marklee77.docker
 ================
 
-[![Build Status](https://travis-ci.org/marklee77/ansible-role-docker.svg?branch=master)](https://travis-ci.org/marklee77/ansible-role-docker)
-
 Role to install Docker on various distributions, particularly Ubuntu, Debian,
 Fedora and CentOS. Debian distributions use the docker.io repository, while
 RedHat distributions use standard repositories.
