@@ -7,6 +7,7 @@ docker_package_info:
   pre_pkgs:
     - device-mapper-libs
     - epel-release
+    - python-pip
   pkgs:
     - docker-io
 
