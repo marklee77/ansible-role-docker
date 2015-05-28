@@ -1,4 +1,4 @@
-docker_kernel_min_version: '3.8'
+docker_kernel_min_version: '3.2'
 
 docker_package_info:
   pkg_mgr: apt
