@@ -8,6 +8,14 @@
     - ../vars/{{ ansible_os_family }}.yml
     - ../vars/defaults.yml
 
+- name: check for minimum kernel version
+  fail:
+    msg: |
+          docker requires a minimum kernel version of 
+          {{ docker_kernel_min_version }} on 
+          {{ ansible_distribution }}-{{ ansible_distribution_version }}
+    when: ansible_kernel|version_compare("{{ docker_kernel_min_version }}", "<")
+
 - name: ensure docker requirements packages are installed
   action: "{{ docker_package_info.pkg_mgr }}"
   args: docker_package_info.args
