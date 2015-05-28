@@ -1,0 +1,20 @@
+docker_package_info:
+  pkg_mgr: apt
+  args:
+    pkg: "{{ item }}"
+    update_cache: yes
+    cache_valid_time: 600
+    state: latest
+  pre_pkgs: []
+  pkgs:
+    - docker.io
+
+docker_repo_key_info:
+  pkg_key: apt_key
+  args: {}
+  repo_keys: []
+
+docker_repo_info:
+  pkg_repo: apt_repository
+  args: {}
+  repos: []

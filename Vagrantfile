@@ -18,6 +18,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     m.vm.hostname = "ubuntu-precise"
   end
 
+  config.vm.define "debian-jessie" do |m|
+    m.vm.box = "debian/jessie64"
+    m.vm.hostname = "debian-jessie"
+  end
+
   config.vm.define "centos-7" do |m|
     m.vm.box = "chef/centos-7.0"
     m.vm.hostname = "centos-7"
