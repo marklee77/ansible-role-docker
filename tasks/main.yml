@@ -1,4 +1,13 @@
 ---
+- name: gather os specific variables
+  include_vars: "{{ item }}"
+  with_first_found:
+    - ../vars/{{ ansible_distribution }}-{{ ansible_distribution_version }}.yml
+    - ../vars/{{ ansible_distribution }}-{{ ansible_distribution_major_version }}.yml
+    - ../vars/{{ ansible_distribution }}.yml
+    - ../vars/{{ ansible_os_family }}.yml
+    - ../vars/defaults.yml
+
 - name: ensure docker requirements packages are installed
   action: "{{ docker_package_info.pkg_mgr }}"
   args: docker_package_info.args
@@ -6,17 +15,16 @@
   when: docker_package_info.pre_pkgs|length > 0
 
 - name: ensure docker repository public key is installed
-  command: apt-key adv --recv-key --keyserver hkp://keyserver.ubuntu.com:80 36A1D7869245C8950F966E92D8576A8BA88D21E9
-  register: docker_key
-  changed_when: docker_key.stderr.find("imported") != -1
-  when: ansible_distribution == "Ubuntu"
+  action: "{{ docker_repo_key_info.pkg_key }}"
+  args: docker_repo_key_info.args
+  with_items: docker_repo_key_info.repo_keys
+  when: docker_repo_key_info.repo_keys|length > 0
 
 - name: ensure docker repository is enabled
-  apt_repository:
-    repo: deb https://get.docker.io/ubuntu docker main
-    update_cache: yes
-    state: present
-  when: ansible_distribution == "Ubuntu"
+  action: "{{ docker_repo_info.pkg_repo }}"
+  args: docker_repo_info.args
+  with_items: docker_repo_info.repos
+  when: docker_repo_info.repos|length > 0
 
 - name: ensure docker packages are installed
   action: "{{ docker_package_info.pkg_mgr }}"
