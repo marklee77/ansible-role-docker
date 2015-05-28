@@ -1,9 +1,9 @@
 ---
 galaxy_info:
   author: Mark Stillwell
-  description: Docker for Ubuntu
+  description: Docker Cross-Platform Parallel
   license: GPLv2
-  min_ansible_version: 1.2
+  min_ansible_version: 1.9
   platforms:
   - name: Ubuntu
     versions:
