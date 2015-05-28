@@ -19,3 +19,5 @@ docker_repo_info:
   pkg_repo: ''
   args: {}
   repos: []
+
+docker_pip_path: /usr/bin/pip

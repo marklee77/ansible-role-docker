@@ -28,3 +28,5 @@ docker_repo_info:
     state: present
   repos:
     - deb https://get.docker.io/ubuntu docker main
+
+docker_pip_path: /usr/local/bin/pip

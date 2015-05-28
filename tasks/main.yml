@@ -42,7 +42,7 @@
 
 - name: ensure that pip is installed
   shell: curl -s https://bootstrap.pypa.io/get-pip.py | python -
-         creates=/usr/local/bin/pip
+         creates={{ docker_pip_path }}
 
 - name: ensure that docker-py client library has been installed via pip
   pip:
