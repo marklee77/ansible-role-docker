@@ -5,7 +5,6 @@ docker_package_info:
       state: latest
       update_cache: yes
   pre_pkgs:
-    - ca-certificates
     - device-mapper-libs
     - epel-release
   pkgs:
