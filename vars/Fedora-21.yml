@@ -1,1 +1,19 @@
-CentOS-7.yml
+docker_package_info:
+  pkg_mgr: yum
+  args:
+      name: "{{ item }}"
+      state: latest
+      update_cache: yes
+  pre_pkgs: []
+  pkgs:
+    - docker
+
+docker_repo_key_info:
+  pkg_key: ''
+  args: {}
+  repo_keys: []
+
+docker_repo_info:
+  pkg_repo: ''
+  args: {}
+  repos: []

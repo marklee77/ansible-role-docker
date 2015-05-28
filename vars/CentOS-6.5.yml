@@ -5,9 +5,8 @@ docker_package_info:
       state: latest
       update_cache: yes
   pre_pkgs:
-    - device-mapper-libs
     - epel-release
-    - python-pip
+    - device-mapper-libs
   pkgs:
     - docker-io
 

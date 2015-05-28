@@ -4,8 +4,7 @@ docker_package_info:
       name: "{{ item }}"
       state: latest
       update_cache: yes
-  pre_pkgs: 
-    - python-pip
+  pre_pkgs: []
   pkgs:
     - docker-io
 

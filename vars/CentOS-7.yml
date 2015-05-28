@@ -5,7 +5,7 @@ docker_package_info:
       state: latest
       update_cache: yes
   pre_pkgs: 
-    - python-pip
+    - epel-release
   pkgs:
     - docker
 
