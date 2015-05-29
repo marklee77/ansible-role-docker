@@ -1,0 +1,13 @@
+---
+- hosts: all
+  sudo: True
+  gather_facts: False
+  tasks:
+
+    - name: verify that docker can launch hello-world container
+      docker:
+        name: hello-world_testrun
+        image: hello-world
+        detach: False
+        docker_api_version: 1.17
+        state: present
