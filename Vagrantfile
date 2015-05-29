@@ -50,6 +50,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       ansible.playbook = "deploy.yml"
       ansible.limit = 'all'
     end
+    m.vm.provision "ansible" do |ansible|
+      ansible.playbook = "test.yml"
+      ansible.limit = 'all'
+    end
   end
 
 end
