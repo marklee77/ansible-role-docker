@@ -8,6 +8,7 @@ docker_package_info:
       update_cache: yes
   pre_pkgs:
     - epel-release
+    - curl
     - device-mapper-libs
   pkgs:
     - docker-io

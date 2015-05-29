@@ -9,6 +9,7 @@ docker_package_info:
     state: latest
   pre_pkgs: 
     - apt-transport-https
+    - curl
     - software-properties-common
   pkgs:
     - lxc-docker
