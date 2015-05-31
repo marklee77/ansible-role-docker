@@ -1,0 +1,26 @@
+openstack_compute_package_info:
+  pkg_mgr: apt
+  args:
+    pkg: "{{ item }}"
+    update_cache: yes
+    cache_valid_time: 600
+    state: latest
+  pre_pkgs: []
+  pkgs:
+    - nova-compute-lxc
+    - neutron-common
+    - neutron-plugin-ml2
+    - neutron-plugin-openvswitch-agent
+
+openstack_compute_repo_info:
+  pkg_repo: apt_repository
+  args:
+    repo: "{{ item }}"
+    update_cache: yes
+    state: present
+  repos: []
+
+openstack_compute_pip_path: /usr/local/bin/pip
+
+openstack_compute_nova_docker_module_path: 
+  /usr/local/lib/python2.7/dist-packages/novadocker
