@@ -28,15 +28,15 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     m.vm.hostname = "debian-wheezy"
   end
 
-  config.vm.define "fedora-21" do |m|
-    m.vm.box = "chef/fedora-21"
-    m.vm.hostname = "fedora-21"
-  end
+  #config.vm.define "fedora-21" do |m|
+  #  m.vm.box = "chef/fedora-21"
+  #  m.vm.hostname = "fedora-21"
+  #end
 
-  config.vm.define "fedora-20" do |m|
-    m.vm.box = "chef/fedora-20"
-    m.vm.hostname = "fedora-20"
-  end
+  #config.vm.define "fedora-20" do |m|
+  #  m.vm.box = "chef/fedora-20"
+  #  m.vm.hostname = "fedora-20"
+  #end
 
   config.vm.define "centos-7" do |m|
     m.vm.box = "chef/centos-7.0"
