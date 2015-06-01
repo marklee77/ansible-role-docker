@@ -60,6 +60,6 @@
          creates={{ docker_pip_path }}
 
 - name: ensure that docker-py client library has been installed via pip
-  command: pip install -U docker-py
-  register: pip_command
-  changed_when: pip_command.stdout.find("Successfully installed docker-py") > -1
+  pip:
+    name: docker-py
+    state: latest
