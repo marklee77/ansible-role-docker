@@ -15,7 +15,7 @@ Example Playbook
 
     - hosts: all
       roles:
-        - marklee77.docker
+        - docker
 
 License
 -------
