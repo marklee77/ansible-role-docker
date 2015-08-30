@@ -10,6 +10,7 @@ docker_package_info:
   pre_pkgs: 
     - apt-transport-https
     - curl
+    - linux-image-extra-{{ ansible_kernel }}
     - software-properties-common
   pkgs:
     - lxc-docker

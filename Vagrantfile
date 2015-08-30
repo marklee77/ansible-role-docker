@@ -8,11 +8,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.ssh.insert_key = false
 
-  config.vm.define "ubuntu-trusty" do |m|
-    m.vm.box = "ubuntu/trusty64"
-    m.vm.hostname = "ubuntu-trusty"
-  end
-
   config.vm.define "ubuntu-precise" do |m|
     m.vm.box = "ubuntu/precise64"
     m.vm.hostname = "ubuntu-precise"
@@ -38,14 +33,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     m.vm.hostname = "fedora-20"
   end
 
-  config.vm.define "centos-7" do |m|
-    m.vm.box = "chef/centos-7.0"
-    m.vm.hostname = "centos-7"
-  end
-
-  config.vm.define "centos-6" do |m|
-    m.vm.box = "chef/centos-6.5"
-    m.vm.hostname = "centos-6"
+  config.vm.define "ubuntu-trusty" do |m|
+    m.vm.box = "ubuntu/trusty64"
+    m.vm.hostname = "ubuntu-trusty"
     m.vm.provision "ansible" do |ansible|
       ansible.playbook = "deploy.yml"
       ansible.limit = 'all'
@@ -55,5 +45,15 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       ansible.limit = 'all'
     end
   end
+
+  #config.vm.define "centos-7" do |m|
+  #  m.vm.box = "chef/centos-7.0"
+  #  m.vm.hostname = "centos-7"
+  #end
+
+  #config.vm.define "centos-6" do |m|
+  #  m.vm.box = "chef/centos-6.5"
+  #  m.vm.hostname = "centos-6"
+  #end
 
 end
