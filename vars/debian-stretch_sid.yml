@@ -1,0 +1,35 @@
+docker_kernel_min_version: '3.2'
+
+docker_package_info:
+  pkg_mgr: apt
+  args:
+    pkg: "{{ item }}"
+    update_cache: yes
+    cache_valid_time: 600
+    state: latest
+  pre_pkgs: 
+    - apt-transport-https
+    - curl
+    - software-properties-common
+  pkgs:
+    - lxc-docker
+
+docker_repo_key_info:
+  pkg_key: apt_key
+  args:
+    id: "{{ item }}"
+    keyserver: hkp://keyserver.ubuntu.com:80
+    state: present
+  repo_keys:
+    - 36A1D7869245C8950F966E92D8576A8BA88D21E9
+
+docker_repo_info:
+  pkg_repo: apt_repository
+  args:
+    repo: "{{ item }}"
+    update_cache: yes
+    state: present
+  repos:
+    - deb https://get.docker.io/ubuntu docker main
+
+docker_pip_path: /usr/local/bin/pip
