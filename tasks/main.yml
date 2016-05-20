@@ -28,26 +28,26 @@
 
 - name: ensure docker requirements packages are installed
   action: "{{ docker_package_info.pkg_mgr }}"
-  args: docker_package_info.args
-  with_items: docker_package_info.pre_pkgs
+  args: "{{ docker_package_info.args }}"
+  with_items: "{{ docker_package_info.pre_pkgs }}"
   when: docker_package_info.pre_pkgs|length > 0
 
 - name: ensure docker repository public key is installed
   action: "{{ docker_repo_key_info.pkg_key }}"
-  args: docker_repo_key_info.args
-  with_items: docker_repo_key_info.repo_keys
+  args: "{{ docker_repo_key_info.args }}"
+  with_items: "{{ docker_repo_key_info.repo_keys }}"
   when: docker_repo_key_info.repo_keys|length > 0
 
 - name: ensure docker repository is enabled
   action: "{{ docker_repo_info.pkg_repo }}"
-  args: docker_repo_info.args
-  with_items: docker_repo_info.repos
+  args: "{{ docker_repo_info.args }}"
+  with_items: "{{ docker_repo_info.repos }}"
   when: docker_repo_info.repos|length > 0
 
 - name: ensure docker packages are installed
   action: "{{ docker_package_info.pkg_mgr }}"
-  args: docker_package_info.args
-  with_items: docker_package_info.pkgs
+  args: "{{ docker_package_info.args }}"
+  with_items: "{{ docker_package_info.pkgs }}"
   when: docker_package_info.pkgs|length > 0
 
 - name: ensure docker service is started and enabled
