@@ -1,4 +1,5 @@
 - hosts: all
-  sudo: True
+  become: False
+  become_user: root
   roles:
     - docker
