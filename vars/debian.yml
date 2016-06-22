@@ -13,6 +13,8 @@ docker_package_info:
     - software-properties-common
   pkgs:
     - docker-engine
+  service_name:
+    - docker
 
 docker_repo_key_info:
   pkg_key: apt_key

@@ -10,6 +10,8 @@ docker_package_info:
     - curl
   pkgs:
     - docker
+  service_name:
+    - "{{docker_package_info.pkgs}}"  
 
 docker_repo_key_info:
   pkg_key: ''
