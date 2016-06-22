@@ -13,7 +13,7 @@ docker_package_info:
   pkgs:
     - docker-io
   service_name:
-    - "{{docker_package_info.pkgs}}"
+    - docker
 
 docker_repo_key_info:
   pkg_key: ''
