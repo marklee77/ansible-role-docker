@@ -12,6 +12,8 @@ docker_package_info:
     - device-mapper-libs
   pkgs:
     - docker-io
+  service_name:
+    - docker
 
 docker_repo_key_info:
   pkg_key: ''

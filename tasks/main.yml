@@ -56,7 +56,7 @@
     enabled: yes
     state: started
   with_items:
-    - docker
+    - "{{ docker_package_info.service_name }}"
 
 - name: ensure that pip is installed
   shell: curl -s https://bootstrap.pypa.io/get-pip.py | python -
