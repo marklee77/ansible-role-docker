@@ -1,26 +1,10 @@
 docker_kernel_min_version: '0'
 
-docker_package_info:
-  pkg_mgr: yum
-  args:
-      name: "{{ item }}"
-      state: latest
-      update_cache: yes
-  pre_pkgs: 
-    - curl
-  pkgs:
-    - docker
-  service_name:
-    - "{{docker_package_info.pkgs}}"  
+docker_pre_packages:
+  - python-pip
 
-docker_repo_key_info:
-  pkg_key: ''
-  args: {}
-  repo_keys: []
+docker_packages:
+  - docker
 
-docker_repo_info:
-  pkg_repo: ''
-  args: {}
-  repos: []
-
-docker_pip_path: /usr/bin/pip
+docker_services:
+  - docker

@@ -1,66 +1,65 @@
 ---
-
-- set_fact: ansible_distribution="{{ansible_distribution|lower|replace('\"', '')}}"
+- set_fact:
+    ansible_distro: "{{ ansible_distribution|lower|replace('\"', '') }}"
 
 - name: gather os specific variables
   include_vars: "{{ item }}"
   with_first_found:
     - files:
-      - "{{ ansible_distribution }}-{{
+      - "{{ ansible_distro }}-{{
             ansible_distribution_version|lower|replace('/', '_') }}.yml"
-      - "{{ ansible_distribution }}-{{
-            ansible_distribution_release }}.yml"
-      - "{{ ansible_distribution }}-{{
+      - "{{ ansible_distro }}-{{ ansible_distribution_release }}.yml"
+      - "{{ ansible_distro }}-{{
             ansible_distribution_major_version|lower|replace('/', '_') }}.yml"
-      - "{{ ansible_distribution }}.yml"
+      - "{{ ansible_distro }}.yml"
       - "{{ ansible_os_family|lower }}.yml"
       - defaults.yml
       paths:
       - ../vars
 
 - name: check for minimum kernel version
-  fail:
+  assert:
+    that: ansible_kernel|version_compare(docker_kernel_min_version, ">=")
     msg: >
-          docker requires a minimum kernel version of
-          {{ docker_kernel_min_version }} on
-          {{ ansible_distribution }}-{{ ansible_distribution_version }}
-  when: ansible_kernel|version_compare(docker_kernel_min_version, "<")
+      docker requires a minimum kernel version of
+      {{ docker_kernel_min_version }} on
+      {{ ansible_distribution }}-{{ ansible_distribution_version }}
 
 - name: ensure docker requirements packages are installed
-  action: "{{ docker_package_info.pkg_mgr }}"
-  args: "{{ docker_package_info.args }}"
-  with_items: "{{ docker_package_info.pre_pkgs }}"
-  when: docker_package_info.pre_pkgs|length > 0
+  package:
+    name: "{{ item }}"
+    state: latest
+  with_items: "{{ docker_pre_packages }}"
+  when: docker_pre_packages is defined
 
 - name: ensure docker repository public key is installed
-  action: "{{ docker_repo_key_info.pkg_key }}"
-  args: "{{ docker_repo_key_info.args }}"
-  with_items: "{{ docker_repo_key_info.repo_keys }}"
-  when: docker_repo_key_info.repo_keys|length > 0
+  apt_key:
+    id: "{{ docker_apt_key }}"
+    keyserver: hkp://p80.pool.sks-keyservers.net:80
+    state: present
+  when: docker_apt_key is defined
 
 - name: ensure docker repository is enabled
-  action: "{{ docker_repo_info.pkg_repo }}"
-  args: "{{ docker_repo_info.args }}"
-  with_items: "{{ docker_repo_info.repos }}"
-  when: docker_repo_info.repos|length > 0
+  apt_repository:
+    repo: "{{ docker_apt_repo }}"
+    update_cache: true
+    state: present
+  when: docker_apt_repo is defined
 
 - name: ensure docker packages are installed
-  action: "{{ docker_package_info.pkg_mgr }}"
-  args: "{{ docker_package_info.args }}"
-  with_items: "{{ docker_package_info.pkgs }}"
-  when: docker_package_info.pkgs|length > 0
+  package:
+    name: "{{ item }}"
+    state: latest
+  with_items: "{{ docker_packages }}"
+  when: docker_packages is defined
 
 - name: ensure docker service is started and enabled
   service:
     name: "{{ item }}"
     enabled: yes
     state: started
-  with_items:
-    - "{{ docker_package_info.service_name }}"
-
-- name: ensure that pip is installed
-  shell: curl -s https://bootstrap.pypa.io/get-pip.py | python -
-         creates={{ docker_pip_path }}
+  with_items: "{{ docker_services }}"
+  when: docker_services is defined
 
 - name: ensure that docker-py client library has been installed via pip
   pip:
