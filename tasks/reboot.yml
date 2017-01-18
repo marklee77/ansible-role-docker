@@ -3,7 +3,7 @@
   shell: sleep 5 && /sbin/reboot
   async: 1
   poll: 0
-  ignore_errors: yes
+  ignore_errors: true
 
 - name: wait for ssh to come back up after reboot
   become: false
