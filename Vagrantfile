@@ -5,11 +5,10 @@
 VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
-  config.vm.define "ubuntu-trusty" do |m|
+  config.vm.define "ubuntu-trusty64" do |m|
     m.vm.box = "ubuntu/trusty64"
-    m.vm.hostname = "ubuntu-trusty"
     m.vm.provision "ansible" do |ansible|
-      ansible.playbook = "deploy.yml"
+      ansible.playbook = "site.yml"
       ansible.limit = 'all'
     end
     m.vm.provision "ansible" do |ansible|

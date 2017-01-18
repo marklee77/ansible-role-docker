@@ -14,6 +14,7 @@ Example Playbook
 -------------------------
 
     - hosts: all
+      become: true
       roles:
         - docker
 
