@@ -5,12 +5,17 @@
   poll: 0
   ignore_errors: true
 
+- name: register ssh host and port
+  set_fact:
+    upgrade_ssh_host: "{{ ansible_host|default(ansible_ssh_host|default(inventory_hostname)) }}"
+    upgrade_ssh_port: "{{ ansible_port|default(ansible_ssh_port|default(22)) }}"
+
 - name: wait for ssh to come back up after reboot
   become: false
   delegate_to: localhost
   wait_for:
-    host: "{{ ansible_host|default(ansible_ssh_host|default(inventory_hostname)) }}"
-    port: "{{ ansible_port|default(ansible_ssh_port|default(22)) }}"
+    host: "{{ upgrade_ssh_host }}"
+    port: "{{ upgrade_ssh_port }}"
     delay: 30
     timeout: 600
     state: started
